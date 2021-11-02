@@ -6,102 +6,74 @@ import {
   Text,
   View,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 
 const App = () => {
-  // 6th lacture
-  // const [name, setNmane] = useState('Bilal')
-  // const [seccion, setSeccion] = useState({ number: 6, title: 'old state' })
-  // const [current, setCurrent] = useState(true)
-  // 7th
-  const [name, setNmane] = useState('Style Test')
+  const [Items, setItems] = useState([
+    { key: 1, Item: 'Item 1' },
+    { key: 2, Item: 'Item 2' },
+    { key: 3, Item: 'Item 3' },
+    { key: 4, Item: 'Item 4' },
+    { key: 5, Item: 'Item 5' },
+    { key: 6, Item: 'Item 6' },
+    { key: 7, Item: 'Item 7' },
+    { key: 8, Item: 'Item 8' },
+    { key: 44, Item: 'Item 9' },
+    { key: 68, Item: 'Item 27' },
+    { key: 0, Item: 'Item 78' },
+  ]);
+  const [Refreshing, setRefreshing] = useState(false)
 
-
-
-  const onClickHandler = () => {
-    // 7 lac
-    setNmane('Styke Test is Done! ')
-    // 6 lac
-    // setNmane('Programing with Bilal ')
-    // setSeccion({ number: 7, title: 'new state' })
-    // setCurrent(false)
-
+  const onReresh =  () =>{
+    setRefreshing(true);
+    setItems([...Items, {key:69, Item: 'item 69',}])
+    setRefreshing(false);
   }
-
   return (
-    // <ScrollView>
-    <View style={styles.body1}>
-      {/* <View> */}
-      {/* <Text style={styles.text}>
-            {name}
-          </Text>
-          <Text style={styles.text}>
-            This is seccion {seccion.number} and about {seccion.title}
-          </Text>
-          <Text style={styles.text}>
-            {current ? 'current seccion' : 'next seccion'}
-          </Text>
-          {/* <Button title = 'youtube channel' onPress={()=>{Linking.openURL('https://www.youtube.com/channel/UCSZgowEvaE3KBW3vmc643ow')}}></Button> */}
-      {/* <Button title='Update State' onPress={onClickHandler}></Button> */}
-      {/* <Text>end the 6 lacture</Text> */}
-      {/* </View> */}
-        <View style={styles.View1}>
-          <Text style={styles.text}>1</Text>
-        </View>
-        <View style={styles.View2}>
-          <Text style={styles.text}>2</Text>
-        </View>
-        <View style={styles.View3}>
-          <Text style={styles.text}>3</Text>
-        </View>
-      
-    </View>
-
-    // </ScrollView>
-  );
+    <ScrollView
+      style={styles.body}
+      refreshControl={
+        <RefreshControl
+          refreshing={Refreshing}
+          onRefresh={onReresh}
+          colors={['blue']}
+        />
+      }
+    >
+      {
+        Items.map((object) => {
+          return (
+            <View style={styles.item} key={object.key}>
+              <Text style={styles.text}>{object.Item}</Text>
+            </View>
+          )
+        })
+      }
+    </ScrollView>
+  )
 };
 const styles = StyleSheet.create({
-  body1: {
+  body: {
     flex: 1,
-
-    flexDirection: 'column',    backgroundColor: '#f00fffff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#f00fffff',
+    // alignItems: 'stretch',
+    // justifyContent: 'center',
     // borderWidth: 10,
-
   },
-  // body: {
-  //   flex: 1,
-  //   backgroundColor: 'white',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   borderWidth: 10,
-  //   flexDirection: 'row'
-  // },
+  item: {
+    margin: 15,
+    backgroundColor: "#4ae",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   text: {
     color: '#000000',
     fontSize: 20,
     fontStyle: 'italic',
     margin: 10,
-    textTransform: 'uppercase',
-  },
-  View1: {
-    flex:1,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  View2: {
-    flex:1,
-    backgroundColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  View3: {
-    flex:1,
-    backgroundColor: '#00ffff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // textTransform: 'uppercase',
   },
 })
 
