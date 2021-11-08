@@ -12,13 +12,40 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  Alert,
+  ToastAndroid,
 } from 'react-native';
 
 const App = () => {
   const [name, Setname] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const onPressHandler = () => {
-    setSubmitted(!submitted);
+    if (name.length > 3) {
+      setSubmitted(!submitted);
+    } else {
+      // Alert.alert('Warning', 'The name must be longer then 3 characters', [
+      //   {
+      //     text: 'not show again',
+      //     onPress: () => console.warn('do not show again')
+      //   },
+      //   {
+      //     text: 'Cancle',
+      //     onPress: () => console.warn('Cancle')
+      //   },
+      //   {
+      //     text: 'Ok',
+      //     onPress: () => console.warn('Ok')
+      //   },
+      // ], {
+      //   cancelable: true,
+      //   onDismiss: () => console.warn('Alert Dismiss')
+      // })
+      ToastAndroid.showWithGravity(
+        'The name must be longer then 3 characters',
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER,
+      )
+    }
   }
 
   return (
@@ -49,10 +76,10 @@ const App = () => {
       </TouchableOpacity> */}
       <Pressable
         onPress={onPressHandler}
-        hitSlop={{top:150,bottom:150,left:150,right:150}}
-        android_ripple={{color:'#00f'}}
-        style={({pressed})=>[
-          {backgroundColor: pressed? 'white':'green'},
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        android_ripple={{ color: '#00f' }}
+        style={({ pressed }) => [
+          { backgroundColor: pressed ? 'white' : 'green' },
           styles.button]}
       >
         <Text style={styles.text}>
