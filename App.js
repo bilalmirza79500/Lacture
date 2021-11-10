@@ -14,42 +14,51 @@ import {
   Pressable,
   Alert,
   ToastAndroid,
+  Modal,
 } from 'react-native';
 
 const App = () => {
   const [name, Setname] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showWarning, SetshowWarning] = useState(false);
   const onPressHandler = () => {
     if (name.length > 3) {
       setSubmitted(!submitted);
     } else {
-      // Alert.alert('Warning', 'The name must be longer then 3 characters', [
-      //   {
-      //     text: 'not show again',
-      //     onPress: () => console.warn('do not show again')
-      //   },
-      //   {
-      //     text: 'Cancle',
-      //     onPress: () => console.warn('Cancle')
-      //   },
-      //   {
-      //     text: 'Ok',
-      //     onPress: () => console.warn('Ok')
-      //   },
-      // ], {
-      //   cancelable: true,
-      //   onDismiss: () => console.warn('Alert Dismiss')
-      // })
-      ToastAndroid.showWithGravity(
-        'The name must be longer then 3 characters',
-      ToastAndroid.LONG,
-      ToastAndroid.CENTER,
-      )
+      SetshowWarning(true);
     }
   }
 
   return (
     <View style={styles.body}>
+      <Modal
+        visible={showWarning}
+        transparent
+        onRequestClose={() =>
+          SetshowWarning(false)
+        }
+        animationType='slide'
+        hardwareAccelerated
+      >
+        <View style={styles.centred_view}>
+          <View style={styles.warnig_modle}>
+            <View style={styles.warning_tital}>
+              <Text style={styles.text}>WARING!</Text>
+            </View>
+            <View style={styles.warning_body}>
+              <Text style={styles.text}>The name must be loger the 2 chereters</Text>
+            </View>
+            <Pressable
+            onPress={()=>SetshowWarning(false)}
+            style={styles.warning_button}
+            android_ripple={{color:'#fff'}}
+            >
+              <Text style={styles.text}>ok</Text>
+            </Pressable>
+          </View>
+        </View>
+
+      </Modal>
       <Text styles={styles.text}>
         Please write your Name :
       </Text>
@@ -121,6 +130,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 20,
     margin: 10,
+    textAlign:'center'
     // textTransform: 'uppercase',
   },
   button: {
@@ -129,6 +139,38 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
     alignItems: 'center',
   },
+  warning_tital: {
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red',
+    borderTopLeftRadius: 19,
+    borderTopRightRadius: 19
+  },
+  centred_view: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00000099'
+  },
+  warnig_modle: {
+    height: 300,
+    width: 300,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#000009',
+    borderRadius: 20,
+  },
+  warning_body:{
+    height:200,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  warning_button:{
+    backgroundColor:'#00ffff',
+    borderBottomLeftRadius:19,
+    borderBottomRightRadius:19,
+  }
 })
 
 export default App;
