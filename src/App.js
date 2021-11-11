@@ -18,6 +18,8 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
+import BilalBUtton from './custombutton';
+import Herder from './Header';
 
 const App = () => {
   const [name, Setname] = useState('');
@@ -32,10 +34,11 @@ const App = () => {
   }
 
   return (
-    <ImageBackground 
-    style={styles.body}
-    source={{uri:'https://image.freepik.com/free-photo/colorful-abstract-textured-background-design_53876-108265.jpg'}}
+    <ImageBackground
+      style={styles.body}
+      source={{ uri: 'https://image.freepik.com/free-photo/colorful-abstract-textured-background-design_53876-108265.jpg' }}
     >
+      <Herder/>
       <Modal
         visible={showWarning}
         transparent
@@ -74,6 +77,17 @@ const App = () => {
       // keyboardType='numeric'
       // editable={false}
       />
+      <BilalBUtton
+        onPressFunction={onPressHandler}
+        title={submitted ? 'Clear' : 'Submit'}
+        color={'green'}
+      />
+      <BilalBUtton
+        onPressFunction={() => { }}
+        title={'Test'}
+        color={'#ff00ff'}
+        style={{ margin: 10 }}
+      />
       {/* <Button
         title={submitted ? 'Clrae' : 'submit'}
         onPress={onPressHandler}
@@ -88,7 +102,7 @@ const App = () => {
           {submitted ? 'Clear' : 'Submit'}
         </Text>
       </TouchableOpacity> */}
-      <Pressable
+      {/* <Pressable
         onPress={onPressHandler}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         android_ripple={{ color: '#00f' }}
@@ -99,7 +113,7 @@ const App = () => {
         <Text style={styles.text}>
           {submitted ? 'Clear' : 'Submit'}
         </Text>
-      </Pressable>
+      </Pressable> */}
       {submitted ?
         <View style={styles.body}>
           <Text styles={styles.text}>
@@ -107,14 +121,14 @@ const App = () => {
           </Text>
           <Image
             style={styles.image}
-            source={require('./Assests/Done.jpg')}
+            source={require('../Assests/Done.jpg')}
             resizeMode='stretch'
           />
         </View>
         :
         <Image
           style={styles.image}
-          source={{ uri: 'https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80' }}
+          source={{ uri: 'https://media.istockphoto.com/photos/hand-writing-word-oops-with-felt-tip-pen-picture-id471318048' }}
           resizeMode='stretch'
         />
       }
