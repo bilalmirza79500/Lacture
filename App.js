@@ -15,6 +15,8 @@ import {
   Alert,
   ToastAndroid,
   Modal,
+  Image,
+  ImageBackground,
 } from 'react-native';
 
 const App = () => {
@@ -30,7 +32,10 @@ const App = () => {
   }
 
   return (
-    <View style={styles.body}>
+    <ImageBackground 
+    style={styles.body}
+    source={{uri:'https://image.freepik.com/free-photo/colorful-abstract-textured-background-design_53876-108265.jpg'}}
+    >
       <Modal
         visible={showWarning}
         transparent
@@ -49,9 +54,9 @@ const App = () => {
               <Text style={styles.text}>The name must be loger the 2 chereters</Text>
             </View>
             <Pressable
-            onPress={()=>SetshowWarning(false)}
-            style={styles.warning_button}
-            android_ripple={{color:'#fff'}}
+              onPress={() => SetshowWarning(false)}
+              style={styles.warning_button}
+              android_ripple={{ color: '#fff' }}
             >
               <Text style={styles.text}>ok</Text>
             </Pressable>
@@ -96,21 +101,32 @@ const App = () => {
         </Text>
       </Pressable>
       {submitted ?
-        <Text styles={styles.text}>
-          Your are registered as : {name}
-        </Text>
+        <View style={styles.body}>
+          <Text styles={styles.text}>
+            Your are registered as : {name}
+          </Text>
+          <Image
+            style={styles.image}
+            source={require('./Assests/Done.jpg')}
+            resizeMode='stretch'
+          />
+        </View>
         :
-        null
+        <Image
+          style={styles.image}
+          source={{ uri: 'https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80' }}
+          resizeMode='stretch'
+        />
       }
 
-    </View>
+    </ImageBackground>
   )
 };
 const styles = StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#f00fffff',
+    // backgroundColor: '#f00fffff',
     alignItems: 'center',
     // justifyContent: 'center',
     // borderWidth: 10,
@@ -130,7 +146,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 20,
     margin: 10,
-    textAlign:'center'
+    textAlign: 'center'
     // textTransform: 'uppercase',
   },
   button: {
@@ -161,16 +177,21 @@ const styles = StyleSheet.create({
     borderColor: '#000009',
     borderRadius: 20,
   },
-  warning_body:{
-    height:200,
-    alignItems:'center',
-    justifyContent:'center',
+  warning_body: {
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  warning_button:{
-    backgroundColor:'#00ffff',
-    borderBottomLeftRadius:19,
-    borderBottomRightRadius:19,
-  }
+  warning_button: {
+    backgroundColor: '#00ffff',
+    borderBottomLeftRadius: 19,
+    borderBottomRightRadius: 19,
+  },
+  image: {
+    height: 100,
+    width: 100,
+    margin: 10,
+  },
 })
 
 export default App;
