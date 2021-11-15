@@ -19,17 +19,18 @@ const Herder = (props) => {
 
 const styles = StyleSheet.create({
     view: {
-        width:'100%',
+        width: '100%',
         height: 50,
         backgroundColor: '#00f',
         justifyContent: 'center',
         alignItems: 'center'
     },
     text: {
-        fontSize:20,
-        fontWeight:'bold',
-        color:'#ffff'
-    }
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#ffff'
+    },
+    
 })
 
 export default Herder;
